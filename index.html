@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emaar Community </title>
+    <link rel="stylesheet" href="property-styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topSelect = document.getElementById('top');
+            const bottomSelect = document.getElementById('bottom');
+            const mailSelect = document.getElementById('mail');
+            
+            const options = {
+                'cairo_gate': ['Option 1', 'Option 2'],
+                'Soul': ['Option 3', 'Option 4'],
+                'Belle_vie': ['Option 5', 'Option 6'],
+                'Marassi': ['Option 7', 'Option 8'],
+                'Uptown': ['Option 9', 'Option 10']
+            };
+
+            const emails = {
+                'cairo_gate': 'cairogatecm@emaar.eg',
+                'Soul': 'soulcm@emaar.eg',
+                'Belle_vie': 'belleviecm@emaar.eg',
+                'Marassi': 'marassicm@emaar.eg',
+                'Uptown': 'uptowncairocm@emaar.eg',
+                'Mivida': 'mividacm@emaar.eg'
+            };
+
+            topSelect.addEventListener('change', function() {
+                const selectedTop = topSelect.value;
+                bottomSelect.innerHTML = '';
+
+                if (selectedTop) {
+                    options[selectedTop].forEach(option => {
+                        const opt = document.createElement('option');
+                        opt.value = option.toLowerCase().replace(/ /g, '_');
+                        opt.innerHTML = option;
+                        bottomSelect.appendChild(opt);
+                    });
+                    bottomSelect.disabled = false;
+                    mailSelect.innerHTML = emails[selectedTop];
+                } else {
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.innerHTML = '--Select a top first--';
+                    bottomSelect.appendChild(defaultOption);
+                    bottomSelect.disabled = true;
+                    mailSelect.innerHTML = '';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1> Emaar Community </h1>
+        <form id="propertyForm">
+            <label for="top">Select a Top:</label>
+            <select id="top" required>
+                <option value="">--Choose a top--</option>
+                <option value="cairo_gate">Cairo Gate</option>
+                <option value="Soul">Soul</option>
+                <option value="Belle_vie">Belle Vie</option>
+                <option value="Marassi">Marassi</option>
+                <option value="Uptown">Uptown</option>
+                <option value="Mivida">Mivida</option>
+            </select>
+            
+            <label for="bottom">Suggested Bottoms:</label>
+            <select id="bottom" disabled>
+                <option value="">--Select a top first--</option>
+            </select>
+
+            <label for="mail">Email:</label>
+            <div id="mail"></div>
+        </form>
+    </div>
+</body>
+</html>
